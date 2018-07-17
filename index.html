@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style type="text/css">
+  .menu{
+    float: right;
+  }
+  .menu li{
+    float: left;
+  }
+  .menu li a{
+    display: block;
+    color: rgb(0, 0, 0);
+    padding: 1em;
+    text-decoration: none;
+  }
+  .showmenu{
+    display: none;
+  }
+  .menu{
+    display: none;
+  }
+  @media (max-width: 767px){
+    .menu {
+      display: block;
+      max-height: 0px;
+      overflow: hidden;
+      transition: max-height 2.3s;
+      margin-top: 1px;
+      position: absolute;
+      z-index: 100;
+      top: 81px;
+      left: 0;
+      right: 0;
+      padding-left: 0px;
+    }
+    .menu li{
+      float: none;
+      list-style:none;
+      text-align: center;
+    }
+    .menu li a{
+      transition: all 0.3s;
+    }
+    .menu li a:hover{
+      background: rgb(190, 190, 190);
+      color: #fff;
+    }
+    .showmenu{
+      display: block;
+      float: right;
+      margin: 1em;
+      padding: 9px 10px;
+      margin-top: 8px;
+      margin-right: 15px;
+      margin-bottom: 8px;
+      background-color: transparent;
+      border-radius: 4px;
+      border-color: #ddd;
+    }
+    /*jQ點擊後動態在 body 加上 class */
+    .menu-show .menu{
+      max-height: 500px
+    }
+    .menu-bar{
+      display: block;
+      width: 22px;
+      height: 2px;
+      border-radius: 1px;
+      background-color: #888;
+    }
+    .menu-bar+.menu-bar{
+      margin-top: 4px;
+    }
+    .submenu {
+      padding-left: 0px;
+      display: none;
+    }
+    .submenu a{
+      font-size: 12px;
+    }
+  }
+</style>
+</head>
+<body>
+  <ul class="menu">
+    <li><a href="#">選單一</a></li>
+    <li>
+      <a href="#">選單二</a>
+      <ul class="submenu">
+          <li><a href="#">子選單一</a></li>
+          <li><a href="#">子選單二</a></li>
+          <li><a href="#">子選單三</a></li>
+          <li><a href="#">子選單四</a></li>
+      </ul>
+    </li>
+    <li><a href="#">選單三</a></li>
+    <li><a href="#">選單四</a></li>
+    <li><a href="#">選單五</a></li>
+  </ul>
+  <button type="button" class="showmenu">
+    <span class="menu-bar"></span>
+    <span class="menu-bar"></span>
+    <span class="menu-bar"></span>
+  </button>
+</body>
+<script>
+  $(document).ready(function() {
+    $('.showmenu').on('click', function(){
+      $('body').toggleClass('menu-show');
+    });
+    $('a').on('click', function(){
+      if($(this).next('ul').length > 0 && $('.submenu').css('display') == 'none'){
+        $(this).next('ul').show();
+      } else if($(this).next('ul').length > 0 && $('.submenu').css('display') == 'block') {
+        $(this).next('ul').hide();
+      }
+    });
+  });
+</script>
+</html>
